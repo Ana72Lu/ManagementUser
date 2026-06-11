@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ManagementUser.Data; // O namespace onde está seu AppDbContext
+using ManagementUser.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         )
     )
 );
+
+// Injeção de Dependência dos Serviços
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<PerfilService>();
+
+builder.Services.AddEndpointsApiExplorer(); // Necessário para controllers mínimos
+builder.Services.AddSwaggerGen(); // Configuração básica do Swagger
 
 var app = builder.Build();
 
